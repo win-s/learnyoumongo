@@ -1,0 +1,214 @@
+db.runCommand(
+    {
+        create:"bounty"
+    }
+);
+db.bounty.insert({
+    firstName:"Asawin",
+    lastName:"Sattiya",
+    living:true,
+    bountyAmt:100000,
+    type:'Jedi'
+});
+db.bounty.insert({
+    firstName:"bec",
+    lastName:"new",
+    living:true,
+    bountyAmt:100000,
+    type:'Jedi'
+});
+db.bounty.insert({
+    firstName:'bec',
+    lastName:'new',
+    living:true,
+    bountyAmt:1,
+    type:'Sith'
+});
+db.bounty.insert({
+    firstName:'tb',
+    lastName:'no Detail'
+});
+db.bounty.insert([
+    {
+        firstName:'tdc',
+        lastName:'new',
+        living:true,
+        bountyAmt:5,
+        type:'Sith'
+    },
+    {
+        firstName:'bbb',
+        lastName:'new',
+        living:true,
+        bountyAmt:5,
+        type:'Sith'
+    }
+])
+db.bounty.update(
+    {
+        firstName:'Asawin'
+    },
+    {
+        $set:{
+            lastName:"s"
+        }
+    }
+);
+db.bounty.update(
+    {
+        firstName:'Asawin'
+    },{
+        $inc:{
+            bountyAmt:100000
+        }
+    }
+);
+db.bounty.insert(
+    {
+        firstName:'testUpdate',
+        nestedArray:[
+            {
+                name:'b'
+            },
+            {
+                name:'c'
+            }
+        ],
+        nestedObj:{
+            name:'d'
+        }
+    }
+)
+db.bounty.update(
+    {
+        firstName:'testUpdate'
+    },
+    {
+        $set:{
+            'nestedObj.name':'e'
+        }
+    }
+);
+db.bounty.update(
+    {
+        firstName:'testUpdate'
+    },{
+        $set:{
+            nestedObj:{
+                name:'f'
+            }
+        }
+    }
+);
+
+db.bounty.update(
+    {
+        firstName:'Asawin'
+    },
+    {
+        $set:{
+            nestedObj:{
+                name:'e',
+                value:0
+            }
+        }
+    }
+);
+db.bounty.update(
+    {
+        firstName:'Asawin'
+    },
+    {
+        $set:{
+            'nestedObj.value':1
+        }
+    }
+);
+
+db.bounty.update(
+    {
+        firstName:'Asawin'
+    },
+    {
+        $set:{
+            nestedObj:{
+                value:2
+            }
+        }
+    }
+);
+db.bounty.find(
+    {
+        'nestedObj.value':{
+            $gte:0
+        }
+    }
+);
+db.bounty.find(
+    {
+        'nestedObj.value':{
+            $gte:0
+        }
+    },{
+        'nestedObj.value':0
+    }
+)
+db.bount.find(
+    {
+        nestedObj:{
+            value:{
+                $gte:0
+            }
+        }
+    }
+)
+db.bounty.update(
+    {
+        firstName:'testUpdate',
+    },
+    {
+        $set:{
+            "nestedObj.value":0
+        }
+    }
+);
+//=================================================
+db.bounty.update(
+    {
+        firstName:"testUpdate"
+    },{
+        $set:{
+            "nestedObj.arr":[1,2,3]
+        }
+    }
+);
+db.bounty.update(
+    {
+        firstName:"testUpdate"
+    },{
+        $push:{
+            "nestedObj.arr":4
+        }
+    }
+);
+db.bounty.update(
+    {
+        firstName:"testUpdate"
+    },{
+        $push:{
+            "nestedObj.arr":{
+                obj:{name:'1'}
+            }
+        }
+    }
+);
+db.bounty.find(
+    {
+        'nestedObj.arr':{
+            $exists:true
+        }
+    }
+)
+db.bounty.find({
+    'nestedObj.arr.obj.name':'1'
+})
